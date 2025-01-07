@@ -42,4 +42,8 @@ public class ReportsService {
     public List<Reports> findUnverifiedReports() {
         return reportsRepository.findUnverifiedReports();
     }
+
+    public List<Reports> getReportbySearch(String keyword) {
+        return reportsRepository.getReportbySearch(keyword);
+    }
 }

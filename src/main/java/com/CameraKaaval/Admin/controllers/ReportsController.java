@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/reports")
 public class ReportsController {
     @Autowired
@@ -21,5 +22,10 @@ public class ReportsController {
     @PutMapping("/update/{id}/{status}")
     public String updateVerifyStatus(@PathVariable String id, @PathVariable boolean status){
         return reportsService.updateVerifyStatus(id, status);
+    }
+
+    @GetMapping("/unverified/search")
+    public List<Reports> searchReports(@RequestParam String keyword) {
+        return reportsService.getReportbySearch(keyword);
     }
 }

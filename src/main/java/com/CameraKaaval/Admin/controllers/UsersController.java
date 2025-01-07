@@ -4,10 +4,12 @@ import com.CameraKaaval.Admin.models.Users;
 import com.CameraKaaval.Admin.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 public class UsersController {
     @Autowired
