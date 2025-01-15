@@ -10,7 +10,6 @@ public class FinesService {
     @Autowired
     private FinesRepository finesRepository;
 
-
     public String imposeFine(Fines fine) {
         finesRepository.save(fine);
         return "Saved!";

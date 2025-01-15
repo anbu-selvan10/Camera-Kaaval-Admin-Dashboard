@@ -16,7 +16,7 @@ public class FinesController {
     @Autowired
     private FinesService finesService;
 
-    @PostMapping("/impose")
+    @PostMapping("/addFines")
     public String imposeFine(@RequestBody Fines fine){
         return finesService.imposeFine(fine);
     }

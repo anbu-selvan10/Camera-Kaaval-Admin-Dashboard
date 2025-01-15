@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Reports.css';
 import Navbar from "./Navbar";
+import { useNavigate } from 'react-router-dom';
+
 
 const Reports = () => {
   const [reports, setReports] = useState([]);
@@ -86,13 +88,19 @@ const Reports = () => {
   };
   
 
-  const handleVerify = async (id, currentStatus) => {
-    try {
-      await axios.put(`http://localhost:8080/api/reports/update/${id}/${!currentStatus}`);
-      fetchReports();
-    } catch (err) {
-      console.error('Verification error:', err);
-    }
+  // const handleVerify = async (id, currentStatus) => {
+  //   try {
+  //     await axios.put(`http://localhost:8080/api/reports/update/${id}/${!currentStatus}`);
+  //     fetchReports();
+  //   } catch (err) {
+  //     console.error('Verification error:', err);
+  //   }
+  // };
+
+  const navigate = useNavigate();
+
+  const handleVerify = (id, currentStatus, report) => {
+    navigate('/reports2', { state: { report } });
   };
 
   if (loading) return <div className="loading">Loading reports...</div>;
@@ -172,14 +180,14 @@ const Reports = () => {
                       View Location
                     </a>
                     <button
-                      onClick={() => handleVerify(report._id, report.isVerified)}
+                      onClick={() => handleVerify(report._id, report.isVerified, report)}
                       className="verify-button"
                     >
                       {report.isVerified ? 'Mark Unverified' : 'Verify Report'}
                     </button>
                   </div>
                 </div>
-              ) : null // Return null if the report is undefined or null
+              ) : null 
             ))
           ) : (
             <div className="no-reports">No reports found</div>

@@ -20,7 +20,7 @@ public class ReportsController {
     }
 
     @PutMapping("/update/{id}/{status}")
-    public String updateVerifyStatus(@PathVariable String id, @PathVariable boolean status){
+    public String updateVerifyStatus(@PathVariable String id, @PathVariable String status) {
         return reportsService.updateVerifyStatus(id, status);
     }
 
@@ -28,4 +28,5 @@ public class ReportsController {
     public List<Reports> searchReports(@RequestParam String keyword) {
         return reportsService.getReportbySearch(keyword);
     }
+
 }

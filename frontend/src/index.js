@@ -5,6 +5,7 @@ import './styles/index.css';
 import App from './App';
 import Reports from './Reports';
 import Profile from './Profile';
+import Reports2 from './Report2';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
         <Route path="/Profile" element={<Profile/>}/>
         <Route path="/app" element={<App />} /> 
         <Route path="/reports" element={<Reports/>}/>
+        <Route path="/reports2" element={<Reports2/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

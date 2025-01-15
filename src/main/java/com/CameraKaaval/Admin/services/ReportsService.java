@@ -16,26 +16,21 @@ public class ReportsService {
     @Autowired
     private ReportsRepository reportsRepository;
 
-    public String updateVerifyStatus(String id, boolean status) {
+    public String updateVerifyStatus(String id, String status) {
         Optional<Reports> reports = reportsRepository.findById(id);
-        if(reports.isPresent()){
+        if(reports.isPresent()) {
             Reports report = reports.get();
             Instant currentInstant = Instant.now();
             String formattedDateTime = currentInstant.atOffset(ZoneOffset.UTC)
                     .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
-            if(status){
+            if("Pending".equals(status)) {
                 report.setVerified(true);
                 report.setStatus("Accepted");
                 report.setUpdatedAt(Instant.parse(formattedDateTime));
-            }else{
-                report.setVerified(true);
-                report.setStatus("Rejected");
-                report.setUpdatedAt(Instant.parse(formattedDateTime));
+                reportsRepository.save(report); 
             }
-            reportsRepository.save(report);
         }
-
         return "Updated!";
     }
 

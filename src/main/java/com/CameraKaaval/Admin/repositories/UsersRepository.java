@@ -14,4 +14,7 @@ public interface UsersRepository extends MongoRepository<Users, String> {
 
     @Query("{ 'email': ?0 }")
     Users findByEmail(String email);
+
+    @Query("{ 'vehicleno': ?0 }")
+    Users findByVehicleno(String vehicleno); 
 }
