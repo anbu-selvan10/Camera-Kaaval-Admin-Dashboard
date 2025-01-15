@@ -102,7 +102,7 @@ const Reports2 = () => {
   }
 
   return (
-    <div>
+    <div className="reports2-container">
       <Navbar />
       <div className="report-details-page">
         <h1>Report Details</h1>
@@ -198,6 +198,7 @@ const Reports2 = () => {
           )}
         </div>
       </div>
+      <br></br>
     </div>
   );
 };

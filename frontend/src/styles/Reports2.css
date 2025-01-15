@@ -1,26 +1,26 @@
 /* General styling for the entire page */
-body {
+.reports2-container {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #111827;
     color: #ffffff;
   }
   
-  .report-details-page {
+.report-details-page {
     max-width: 600px;
     margin: 40px auto;
     padding: 30px;
     background-color: #1f2937; /* Slightly lighter shade for contrast */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  }
+}
   
-  .report-details-page h1 {
+.report-details-page h1 {
     font-size: 2.2rem;
     margin-bottom: 30px;
     text-align: center;
     color: #f9fafb;
-  }
+}
   
   .report-card-detailed {
     display: flex;
