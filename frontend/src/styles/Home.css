@@ -59,6 +59,14 @@
     height: 500px;
     margin-right: 5%;
   }
+
+  .home2-image img {
+    width: 100%;
+    border-radius: 10px;
+    max-width: 500px;
+    height: 500px;
+    margin-left: 5%;
+  }
   
   /* profile Section */
   .profile-section {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -19,6 +20,12 @@ public class ReportsController {
         return reportsService.findUnverifiedReports();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Reports> fetchReportDetailsById(@PathVariable String id){
+        return reportsService.fetchReportDetailsById(id);
+
+    }
+
     @PutMapping("/update/{id}/{status}")
     public String updateVerifyStatus(@PathVariable String id, @PathVariable String status) {
         return reportsService.updateVerifyStatus(id, status);
@@ -29,4 +36,8 @@ public class ReportsController {
         return reportsService.getReportbySearch(keyword);
     }
 
+    @PutMapping("/invalid/{id}/{status}")
+    public String invalidReport(@PathVariable String id,@PathVariable String status){
+        return reportsService.invalidReport(id,status);
+    }
 }

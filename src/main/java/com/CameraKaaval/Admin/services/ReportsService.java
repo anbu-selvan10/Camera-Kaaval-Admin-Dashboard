@@ -41,4 +41,27 @@ public class ReportsService {
     public List<Reports> getReportbySearch(String keyword) {
         return reportsRepository.getReportbySearch(keyword);
     }
+
+    public String invalidReport(String id, String status) {
+        Optional<Reports> reports = reportsRepository.findById(id);
+        if(reports.isPresent()){
+            Reports report=reports.get();
+            Instant currentInstant = Instant.now();
+            String formattedDateTime = currentInstant.atOffset(ZoneOffset.UTC)
+                    .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+
+            if("Pending".equals(status)){
+                report.setVerified(true);
+                report.setStatus("Rejected");
+                report.setUpdatedAt(Instant.parse(formattedDateTime));
+                reportsRepository.save(report);
+            }
+        }
+        return "Invalid";
+    }
+
+    public Optional<Reports> fetchReportDetailsById(String id) {
+        Optional<Reports> report=reportsRepository.findById(id);
+        return report;
+    }
 }

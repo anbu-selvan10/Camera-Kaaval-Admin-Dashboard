@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles/Reports2.css';
@@ -69,6 +69,11 @@ const Reports2 = () => {
     };
 
     const updateVerifyStatus = async () => {
+       const userConfirmation = window.confirm('Fine is imposed? Confirm verification of the report?');
+       if (!userConfirmation) {
+        // User clicked "Cancel," so exit the function
+        return;
+        }
         try{
             setIsVerifying(true);
             setVerifyStatus(null);
@@ -77,6 +82,8 @@ const Reports2 = () => {
             if (response.data){
                 setVerifyStatus('Successfully verified');
             }
+
+            navigate("/reports");
         }
         catch(err){
             console.error('Error details:',err.response);
@@ -86,6 +93,43 @@ const Reports2 = () => {
             setIsVerifying(false);
         }
     }
+
+    const [reportDetails, setReportDetails] = useState(report);
+
+    const invalidReport = async () => {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/api/reports/invalid/${reportDetails.id}/Pending`
+        );
+        if (response.data) {
+          alert('Successfully rejected');
+          // Update the local state
+          setReportDetails((prevDetails) => ({
+            ...prevDetails,
+            status: 'Pending',
+          }));
+
+          navigate("/reports");
+        }
+      } catch (err) {
+        console.log('Error response', err.response);
+      }
+    };
+
+  useEffect(() => {
+    const fetchReportDetailsById = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/reports/${report.id}`
+        );
+        setReportDetails(response.data);
+      } catch (err) {
+        console.log('Error fetching report details:', err);
+      }
+    };
+
+    fetchReportDetailsById();
+  }, [reportDetails.id]);
 
   if (!report) {
     return (
@@ -108,7 +152,7 @@ const Reports2 = () => {
         <h1>Report Details</h1>
         <div className="report-card-detailed">
           <img
-            src={report.imageUrl || 'placeholder-image-url'}
+            src={reportDetails.imageUrl || 'placeholder-image-url'}
             alt="Violation"
             className="report-image-detailed"
             onError={(e) => {
@@ -118,40 +162,35 @@ const Reports2 = () => {
           />
         </div>
         <div className="report-info">
-          
-          <h3>{report.location}</h3>
+          <h3>{reportDetails.location}</h3>
           <h2>Reported User Details:</h2>
-          <p>Email: {report.email}</p>
-          <p>Status: {report.status}</p>
-          <p>Verified: {report.isVerified ? 'Yes' : 'No'}</p>
-          <p>Description: {report.description}</p>
-          <p>Latitude: {report.coordinates.latitude}</p>
-          <p>Longitude: {report.coordinates.longitude}</p>
+          <p>Email: {reportDetails.email}</p>
+          <p>Status: {reportDetails.status}</p>
+          <p>Verified: {reportDetails.isVerified ? 'Yes' : 'No'}</p>
+          <p>Description: {reportDetails.description}</p>
+          <p>Latitude: {reportDetails.coordinates.latitude}</p>
+          <p>Longitude: {reportDetails.coordinates.longitude}</p>
           <a
-            href={report.googleMapsUrl}
+            href={reportDetails.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="maps-link"
           >
             View Location on Google Maps
           </a>
-          <button
-            onClick={() => navigate(-1)}
-            className="back-button"
-          >
+          <button onClick={invalidReport} className="back-button">
             Invalid report
           </button>
-          <button
-            onClick={() => navigate(-1)}
-            className="back-button"
-          >
+          <button onClick={() => navigate(-1)} className="back-button">
             Go Back
           </button>
         </div>
 
+        <br></br>
+
         {/* Find User Section */}
         <div className="find-user-section">
-          <h2>Find User</h2>
+          <h2 className='findusertitle'>Find User:</h2>
           <input
             type="text"
             value={vehicleno}
@@ -159,7 +198,7 @@ const Reports2 = () => {
             placeholder="Enter vehicle no"
             className="find-user-input"
           />
-          <button onClick={findUserByVehicle} className="find-user-button">
+          <button onClick={findUserByVehicle} className="back-button">
             Find
           </button>
           {error && <p className="error-message">{error}</p>}
@@ -172,7 +211,7 @@ const Reports2 = () => {
               <button 
                     onClick={imposeFine}
                     disabled={isSubmitting}
-                    className="impose-fine-button"
+                    className="back-button-fine"
                 >
                     {isSubmitting ? 'Imposing Fine...' : 'Impose Fine'}
                 </button>
@@ -180,7 +219,7 @@ const Reports2 = () => {
                 <button 
                     onClick={updateVerifyStatus}
                     disabled={isVerifying}
-                    className="impose-fine-button"
+                    className="back-button-verify"
                 >
                     {isVerifying ? 'Verifying...' : 'Verify Report'}
                 </button>                

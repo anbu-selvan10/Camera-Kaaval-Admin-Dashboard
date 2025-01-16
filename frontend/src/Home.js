@@ -40,7 +40,7 @@ const Home = () => {
             <div className="home1-image">
             <img
                 src={img1}
-                alt="Gameplay Preview"
+                alt="Reports Preview"
             />
             </div>
             
@@ -48,7 +48,7 @@ const Home = () => {
 
         {/* Section 2 */}
         <section className="profile-section">
-        <div className="home1-image">
+        <div className="home2-image">
             <img
                 src={img1}
                 alt="profile Preview"

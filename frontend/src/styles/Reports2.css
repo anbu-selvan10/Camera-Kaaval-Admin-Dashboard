@@ -72,6 +72,24 @@
     color: #ffffff;
   }
   
+  .find-user-input {
+    padding: 10px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px; /* Adjust the width as needed */
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .findusertitle{
+    margin-top: 15%;
+  }
+  
+  .find-user-input:focus {
+    border-color: #374151; /* Matches the button's color */
+  }
+
   .back-button {
     margin-top: 30px;
     padding: 12px 25px;
@@ -83,6 +101,40 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+  }
+
+  .back-button-fine {
+    margin-top: 30px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .back-button-fine:hover {
+    background-color: rgb(114, 38, 38);
+  }
+
+  .back-button-verify {
+    margin-top: 30px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: rgb(45, 212, 64);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .back-button-verify:hover {
+    background-color: rgb(53, 125, 41);
   }
   
   .back-button:hover {
