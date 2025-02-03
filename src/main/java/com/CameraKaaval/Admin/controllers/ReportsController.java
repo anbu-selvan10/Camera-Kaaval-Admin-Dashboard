@@ -20,6 +20,9 @@ public class ReportsController {
         return reportsService.findUnverifiedReports();
     }
 
+    @GetMapping("/verified")
+    public List<Reports> findVerifiedReports() { return reportsService.findVerifiedReports(); }
+
     @GetMapping("/{id}")
     public Optional<Reports> fetchReportDetailsById(@PathVariable String id){
         return reportsService.fetchReportDetailsById(id);

@@ -64,4 +64,8 @@ public class ReportsService {
         Optional<Reports> report=reportsRepository.findById(id);
         return report;
     }
+
+    public List<Reports> findVerifiedReports() {
+        return reportsRepository.findVerifiedReports();
+    }
 }

@@ -86,6 +86,25 @@ const Reports = () => {
       setLoading(false); 
     }
   };
+
+  const fetchVerifiedReports = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get('http://localhost:8080/api/reports/verified', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Verified Reports API Response:', response.data); 
+      setReports(response.data); 
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   
 
   // const handleVerify = async (id, currentStatus) => {
@@ -123,6 +142,7 @@ const Reports = () => {
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
           />
+          <button onClick={fetchVerifiedReports}>View Verified Reports</button>
           {showSearchResults && (
             <div className="search-results">
               {searchResults.length > 0 ? (
@@ -164,8 +184,8 @@ const Reports = () => {
                     <h3>{report.location}</h3>
                     <p className="email">{report.email}</p>
                     <div className="status-badges">
-                      <span className={`badge ${report.isVerified ? 'verified' : 'unverified'}`}>
-                        {report.isVerified ? 'Verified' : 'Unverified'}
+                      <span className={`badge ${report.verified ? 'verified' : 'unverified'}`}>
+                        {report.verified ? 'Verified' : 'Unverified'}
                       </span>
                       <span className={`badge ${report.status.toLowerCase()}`}>
                         {report.status}
@@ -180,10 +200,10 @@ const Reports = () => {
                       View Location
                     </a>
                     <button
-                      onClick={() => handleVerify(report._id, report.isVerified, report)}
+                      onClick={() => handleVerify(report._id, report.verified, report)}
                       className="verify-button"
                     >
-                      {report.isVerified ? 'Mark Unverified' : 'Verify Report'}
+                      {report.verified ? 'Mark Unverified' : 'Verify Report'}
                     </button>
                   </div>
                 </div>
