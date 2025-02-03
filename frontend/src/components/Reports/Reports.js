@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles/Reports.css';
-import Navbar from "./Navbar";
+import '../../styles/Reports.css';
+import Navbar from "../Navbar";
 import { useNavigate } from 'react-router-dom';
 
 

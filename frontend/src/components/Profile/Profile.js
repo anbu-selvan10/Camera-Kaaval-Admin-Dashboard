@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Navbar from "./Navbar";
-import "./styles/profiles.css";
+import Navbar from "../Navbar";
+import "../../styles/profiles.css";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
