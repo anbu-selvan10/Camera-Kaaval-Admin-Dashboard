@@ -37,4 +37,8 @@ public class UsersService {
     public Users findUserByVehicle(String vehicleno) {
         return usersRepository.findByVehicleno(vehicleno);
     }
+
+    public List<Users> findVerifiedUsers(){
+        return usersRepository.findVerifiedUsers();
+    }
 }

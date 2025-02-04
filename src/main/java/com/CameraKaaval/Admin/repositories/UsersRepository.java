@@ -16,5 +16,8 @@ public interface UsersRepository extends MongoRepository<Users, String> {
     Users findByEmail(String email);
 
     @Query("{ 'vehicleno': ?0 }")
-    Users findByVehicleno(String vehicleno); 
+    Users findByVehicleno(String vehicleno);
+
+    @Query("{ 'isVerified': true }")
+    List<Users> findVerifiedUsers();
 }

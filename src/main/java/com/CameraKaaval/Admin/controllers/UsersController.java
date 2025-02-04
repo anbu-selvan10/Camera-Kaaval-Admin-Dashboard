@@ -56,4 +56,9 @@ public class UsersController {
         }
     }
 
+    @GetMapping("/verified")
+    public List<Users> findVerifiedUsers(){
+        return usersService.findVerifiedUsers();
+    }
+
 }

@@ -37,6 +37,25 @@ const Profile = () => {
     }
   };
 
+  const fetchVerifiedUsers = async() => {
+    try {
+      setLoading(true);
+      const response = await axios.get('http://localhost:8080/api/users/verified', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('API Response:', response.data);
+      setUsers(response.data);
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleVerify = async (email) => {
     try {
       const response = await axios.put(`http://localhost:8080/api/users/verify/${email}`);
@@ -76,11 +95,11 @@ const Profile = () => {
                   <h3>{user.vehicleno}</h3>
                   <p className="email">{user.email}</p>
                   <div className="status-badges">
-                    <span className={`badge ${user.isVerified ? 'verified' : 'unverified'}`}>
-                      {user.isVerified ? 'Verified' : 'Unverified'}
+                    <span className={`badge ${user.verified ? 'verified' : 'unverified'}`}>
+                      {user.verified ? 'Verified' : 'Unverified'}
                     </span>
                   </div>
-                  {!user.isVerified && (
+                  {!user.verified && (
                     <button
                       className="verify-button"
                       onClick={() => handleVerify(user.email)}
@@ -88,6 +107,7 @@ const Profile = () => {
                       Verify Profile
                     </button>
                   )}
+                  
                 </div>
               </div>
             ) : null
@@ -96,6 +116,7 @@ const Profile = () => {
           <div className="no-users">No users found</div>
         )}
       </div>
+      <button onClick={() => fetchVerifiedUsers()}>View Verified Users</button>
       </div>
     </div>
   );
