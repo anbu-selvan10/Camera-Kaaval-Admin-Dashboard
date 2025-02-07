@@ -1,6 +1,7 @@
 import React, { use } from 'react';
 import './styles/Home.css';
-import img1 from "./images/dev.jpg";
+import profile from "./images/profile.jpg";
+import traffic from "./images/traffic2.jpg";
 import { useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
@@ -39,7 +40,7 @@ const Home = () => {
             </div>
             <div className="home1-image">
             <img
-                src={img1}
+                src={traffic}
                 alt="Reports Preview"
             />
             </div>
@@ -50,7 +51,7 @@ const Home = () => {
         <section className="profile-section">
         <div className="home2-image">
             <img
-                src={img1}
+                src={profile}
                 alt="profile Preview"
             />
             </div>

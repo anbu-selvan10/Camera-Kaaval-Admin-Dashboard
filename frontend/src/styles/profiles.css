@@ -102,3 +102,56 @@
   font-size: 1.2rem;
 }
 
+.users-container {
+  padding: 2rem;
+  background-color: #111827;
+  min-height: 100vh;
+  position: relative;
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 100px; /* Add padding at the bottom to make space for the button */
+}
+
+.viewverified {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+  /* Position at the bottom of the container */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10; /* Ensure it stays on top of other elements */
+}
+
+.viewverified:hover {
+  background-color: #0056b3;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.viewverified:active {
+  background-color: #004494;
+  transform: translateX(-50%) scale(0.98);
+}
+
+.no-users {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -116,7 +116,7 @@ const Profile = () => {
           <div className="no-users">No users found</div>
         )}
       </div>
-      <button onClick={() => fetchVerifiedUsers()}>View Verified Users</button>
+      <button className="viewverified" onClick={() => fetchVerifiedUsers()}>View Verified Users</button>
       </div>
     </div>
   );
